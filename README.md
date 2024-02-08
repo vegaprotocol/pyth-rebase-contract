@@ -1,17 +1,23 @@
-## Foundry
+# `PythRebase`
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
-
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+> Denominate one Pyth feed in terms of another, eg. ETH/USD and USDT/USD to get ETH/USDT
 
 ## Documentation
 
-https://book.getfoundry.sh/
+The contract provides the `getPrice` method with three overloads.
+
+```sol
+interface IPythRebase {
+    // Defaults to 18 decimals (expo = -18) and in terms of USDT. The `id` feed must be
+    // denominated in USD for the conversion to be valid.
+    function getPrice(bytes32 id) returns (int256);
+    // This just applies the defualt of 18 decimals, but allows you to do e.g. ETH/USD and AVAX/USD
+    // to get ETH/AVAX conversion rate, or USDT/USD and ETH/USD to get USDT/ETH
+    function getPrice(bytes32 numerator, bytes32 denominator) returns (int256);
+    // This gives you full control. Note that expo must be <= 0
+    function getPrice(bytes32 numerator, bytes32 denominator, int32 expo) returns (int256);
+}
+```
 
 ## Usage
 
@@ -33,34 +39,12 @@ $ forge test
 $ forge fmt
 ```
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
 ### Deploy
 
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+$ forge script script/PythRebase.s.sol:PythRebaseScript --rpc-url mainnet --private-key <your_private_key>
 ```
 
-### Cast
+## License
 
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+[MIT](LICENSE)
