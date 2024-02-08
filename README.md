@@ -6,7 +6,7 @@
 
 The contract provides the `getPrice` method with three overloads.
 
-```sol
+```solidity
 interface IPythRebase {
     // Defaults to 18 decimals (expo = -18) and in terms of USDT. The `id` feed must be
     // denominated in USD for the conversion to be valid.
