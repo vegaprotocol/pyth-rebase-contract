@@ -4,7 +4,6 @@ pragma solidity ^0.8.24;
 import {IPyth} from "pyth-sdk-solidity/IPyth.sol";
 import {PythStructs} from "pyth-sdk-solidity/PythStructs.sol";
 import "./PriceFeedIDs.sol" as PriceFeedIDs;
-import {console2} from "forge-std/console2.sol";
 
 address constant PYTH_GNOSIS_MAINNET = 0x2880aB155794e7179c9eE2e38200202908C17B43;
 
