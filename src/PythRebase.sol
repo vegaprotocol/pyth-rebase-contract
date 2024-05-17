@@ -57,11 +57,11 @@ contract PythRebase {
         return getPrice(id, PriceFeedIDs.CRYPTO_USDT_USD);
     }
 
-    /// @notice Get the price of a single asset in terms of USDT
+    /// @notice Get the price, with a multiplier, of a single asset in terms of USDT
     /// @param id The feed id of the asset, e.g. ETH/USD
     /// @param multiplier The multiplier to apply to the price.
     /// @return The price of the asset in terms of USDT and to 18 decimal places, e.g. ETH/USDT
     function getPrice(bytes32 id, int32 multiplier) public view returns (int256) {
-        return (getPrice(id, PriceFeedIDs.CRYPTO_USDT_USD) * multiplier);
+        return getPrice(id) * multiplier;
     }
 }

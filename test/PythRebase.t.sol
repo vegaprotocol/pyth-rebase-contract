@@ -20,10 +20,12 @@ contract PythRebaseTest is Test {
         int256 price0 = pythRebase.getPrice(PriceFeedIDs.CRYPTO_ETH_USD, PriceFeedIDs.CRYPTO_USDT_USD, -18);
         int256 price1 = pythRebase.getPrice(PriceFeedIDs.CRYPTO_ETH_USD, PriceFeedIDs.CRYPTO_USDT_USD);
         int256 price2 = pythRebase.getPrice(PriceFeedIDs.CRYPTO_ETH_USD);
+        int256 price3 = pythRebase.getPrice(PriceFeedIDs.CRYPTO_ETH_USD, 1000);
 
         assertTrue(price0 > 0, "Price should be greater than 0");
         assertEq(price0, price1, "Price0 should be equal to price1");
         assertEq(price0, price2, "Price0 should be equal to price2");
+        assertEq(price0 * 1000, price3, "Price0 should be equal to price3");
     }
 }
 
